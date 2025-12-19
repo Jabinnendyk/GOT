@@ -9,9 +9,11 @@ There are 3 folders containing various resources related to implementing the GOT
 
 1) `qualtrics` has all files related to importing the GOT into Qualtrics.
     `GOT.qsf` allows you to directly import the GOT into your Qualtrics account. Additional code for the Qualtrics to ensure the GOT runs smoothly are also included. 
-
+    
     Qualtrics Javacsript files:
     The `GOT_image_preload.rtf` preloads the images to eliminate load-time delays and should be added to the Javascript portion for the `GOT_Inst` question, while `GOT_page_advance.rtf` autoadvances each GOT image after 250 ms and should be added to the `GOT_image` question. The `GOT_conf_slider.rtf` should be applied to the `GOT_conf` and the `GOT_q_hide.rtf` should be applied to `GOT_ID`, `GOT_Answer`, and `loop_number`.
+    
+    *Ensure there is a page break after `GOT_RT` question*
 
 2) `data_analysis` provides some basic code to analysis the GOT in r.
     The `example_project` folder contains example data and a basic script that can be used to clean the data and calculate mean values at a subject level. See the `README.md` in this folder for additional details.
