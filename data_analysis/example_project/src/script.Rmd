@@ -1,0 +1,76 @@
+```{r Clear environment}
+rm(list = ls())
+library(tidyverse); library(data.table); library(correlation)
+```
+
+```{r}
+d0 <- fread("../data/raw/example_data.csv")
+```
+
+```{r add subj id}
+d0[, subj := 1 : .N]
+```
+
+```{r calculate GOT accuracy and estimate}
+#acc
+GOT_ans <- select(d0, contains("GOT_Q"), "subj")
+
+GOT_ans_long <- melt(GOT_ans, "subj",
+                     na.rm = T)
+
+GOT_acc <- GOT_ans_long[, .(acc = sum(value)), subj] # accuracy- qualtrics is set up to default values are set to 0 and 1.
+
+GOT_est <- select(d0, c("GOT_Est", "subj"))
+GOT_est <- GOT_est[!is.na(GOT_Est)]
+
+d_GOT <- GOT_acc[GOT_est, on = "subj"]
+
+hist(d_GOT$acc)
+hist(d_GOT$GOT_Est)
+```
+
+```{r GOT confidence slider}
+GOT_conf <- select(d0, contains("GOT_Conf"), "subj")
+
+GOT_conf_long <- melt(GOT_conf, "subj",
+                      na.rm = T)
+
+GOT_conf_avg <- GOT_conf_long[, .(conf = mean(value, na.rm = T)), subj]
+
+d_GOT <- d_GOT[GOT_conf_avg, on = "subj", nomatch = 0]
+
+hist(d_GOT$conf)
+```
+
+```{r calculate GOT score}
+#scale est and conf then average them 
+cols <- c("GOT_Est", "conf")
+
+d_GOT[, paste0(cols, "z") := lapply(.SD, scale), .SDcols = cols]
+
+d_GOT[, GOTz := (GOT_Estz + confz) / 2]
+```
+
+```{r save dt}
+fwrite(d_GOT, "../data/clean/example_data.csv")
+```
+
+```{r correlation}
+#correlation between acc and est
+select(d_GOT, c(acc, GOT_Est, conf)) |>
+    correlation(p_adjust = "none")
+```
+Correlation between GOT Est and acc is essentially 0 -- subjs are not calibrated to performance
+
+
+
+
+
+
+
+
+
+```{r}
+
+```
+
