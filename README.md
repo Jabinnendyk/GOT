@@ -2,6 +2,8 @@
 ## Repository for the Generalized Overconfidence Task (GOT)
 All resources pertaining the GOT!
 
+Try the GOT here: https://cornell.ca1.qualtrics.com/jfe/form/SV_e2l3jyOPHwjinu6
+
 ### Description
 There are 3 folders containing various resources related to implementing the GOT in your own research. These folders include:
 
