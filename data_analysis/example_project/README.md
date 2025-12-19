@@ -5,10 +5,10 @@ This readme file was generated on 2025-12-19 by Jabin Binnendyk
 Title of Dataset: example_data.csv
 
 ## Author/Principal Investigator Information
-Name: Jabin Binnendyk 
-ORCID:https://orcid.org/0000-0002-1491-6373 
-Institution: Cornell University 
-Email: jdbinnendyk@gmail.com
+Name: Jabin Binnendyk  
+ORCID:https://orcid.org/0000-0002-1491-6373  
+Institution: Cornell University  
+Email: jdbinnendyk@gmail.com  
 
 # DATA & FILE OVERVIEW
 
